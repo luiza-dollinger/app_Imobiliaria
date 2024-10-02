@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity, ActivityIndicator, useWindowDimensions, ScrollView} from "react-native";
 import  AntDesign from "@expo/vector-icons/AntDesign";
 import { colors } from "../../constants/Colors";
-import Constants from "expo-constants";
 import img1 from "../../assets/images/casa.jpg";
 import { Link } from "expo-router";
-
-const statusBarHeight = Constants.statusBarHeight;
 
 //video
 const VIDEO_HEIGHT = 210;
@@ -71,7 +68,6 @@ export default function House() {
 const style = StyleSheet.create({
   
   container: {
-    marginTop: statusBarHeight + 3,
     padding: SCREEN_SPACE,
     backgroundColor: colors.cinza,
   },
