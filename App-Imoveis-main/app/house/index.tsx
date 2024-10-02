@@ -9,7 +9,7 @@ import { Link } from "expo-router";
 const statusBarHeight = Constants.statusBarHeight;
 
 //video
-const VIDEO_HEIGHT = 180;
+const VIDEO_HEIGHT = 210;
 const SCREEN_SPACE = 24;
 import YoutubeIframe from "react-native-youtube-iframe";
 
@@ -130,6 +130,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     margin: 20,
+    marginBottom:40,
   },
 
   textButton: {
