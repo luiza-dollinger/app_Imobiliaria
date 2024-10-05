@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Text,
   View,
@@ -34,7 +35,7 @@ export default function Index() {
       <View style={style.boxBottom}>
         <Text style={style.text}> Esqueceu a senha? </Text>
         <View>
-          <Link href="/home" asChild>
+          <Link href="/(tabs)" asChild>
             <Pressable style={style.btn}>
               <Text style={style.btntext}>Entrar</Text>
             </Pressable>
