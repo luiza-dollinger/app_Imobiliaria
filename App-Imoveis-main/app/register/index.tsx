@@ -36,7 +36,13 @@ export default function Register() {
           <MaterialIcons name="lock" size={20} color={colors.escuro} />
         </View>
       </View>
-      <View style={style.boxBottom}></View>
+      <View style={style.boxBottom}>
+        <Link href="/(tabs)" asChild>
+          <Pressable style={style.btn}>
+            <Text style={style.btntext}>Registrar-se</Text>
+          </Pressable>
+        </Link>
+      </View>
     </View>
   );
 }

@@ -1,112 +1,166 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  ImageBackground,
+} from "react-native";
 import { colors } from "../../constants/Colors";
 import { router } from "expo-router";
 
 interface Imovel {
   id: number;
   title: string;
+  info: string;
   image: any;
 }
 
 export default function Home() {
-
-
   const imoveis: Imovel[] = [
-    { id: 1, title: "Apartamento", image: require("../../assets/images/casa_2.jpg") },
-    { id: 2, title: "Casa de Campo", image: require("../../assets/images/casa_1.jpg") },
-    { id: 3, title: "Sítio", image: require("../../assets/images/apartamento_1.jpg") },
-    { id: 4, title: "Chalé", image: require("../../assets/images/sitio.jpg") },
-    { id: 5, title: "Terreno", image: require("../../assets/images/casa_campo.jpg") },
-    { id: 6, title: "Sítio", image: require("../../assets/images/sitio.jpg") },
+    {
+      id: 1,
+      title: "Casa Maravilhosa",
+      info: "Casa com quatro quartos no melhor condomínio da Zona Oeste",
+      image: require("../../assets/images/casa_2.jpg"),
+    },
+    {
+      id: 2,
+      title: "Casa de Campo",
+      info: "Casa com duas suítes e local para pets",
+      image: require("../../assets/images/casa_1.jpg"),
+    },
+    {
+      id: 3,
+      title: "Apartamento",
+      info: "Apartamento mais barato da região",
+      image: require("../../assets/images/apartamento_1.jpg"),
+    },
+    {
+      id: 4,
+      title: "Terreno",
+      info: "Terreno com 500m²",
+      image: require("../../assets/images/sitio.jpg"),
+    },
+    {
+      id: 5,
+      title: "Chalé",
+      info: "Chalé aconchegante na serra de Petrópolis",
+      image: require("../../assets/images/casa_campo.jpg"),
+    },
   ];
 
   return (
-    
     <ScrollView>
-    <View style={styles.container}>
-      
-      <View style={styles.imagemContainer}>
-        <Image
+      <View style={styles.container}>
+        <ImageBackground
           source={require("../../assets/images/imagem_home.jpg")}
           style={styles.imagem}
-        />
-        <Text style={styles.textoHome}>Encontre seu lugar</Text>
+        >
+          <View style={styles.overlay}>
+            <Text style={styles.textoHome}>Encontre seu lugar</Text>
+          </View>
+        </ImageBackground>
+
+        <View style={styles.linha}>
+          <View style={styles.caixa}>
+            <View style={styles.imagemContainer}>
+              <Image
+                source={require("../../assets/images/apartamento_2.jpg")}
+                style={styles.imagemCategoria}
+              />
+              <View style={styles.overlay2} />
+            </View>
+            <Text style={styles.textoCaixaAbaixo}>Comprar Apt</Text>
+          </View>
+
+          <View style={styles.caixa}>
+            <View style={styles.imagemContainer}>
+              <Image
+                source={require("../../assets/images/casa_2.jpg")}
+                style={styles.imagemCategoria}
+              />
+              <View style={styles.overlay2} />
+            </View>
+            <Text style={styles.textoCaixaAbaixo}>Comprar Casas</Text>
+          </View>
+
+          <View style={styles.caixa}>
+            <View style={styles.imagemContainer}>
+              <Image
+                source={require("../../assets/images/casa_1.jpg")}
+                style={styles.imagemCategoria}
+              />
+              <View style={styles.overlay2} />
+            </View>
+            <Text style={styles.textoCaixaAbaixo}>Alugar Casas</Text>
+          </View>
+        </View>
+
+        <View style={styles.linha}>
+          <View style={styles.caixa}>
+            <View style={styles.imagemContainer}>
+              <Image
+                source={require("../../assets/images/apartamento_1.jpg")}
+                style={styles.imagemCategoria}
+              />
+              <View style={styles.overlay2} />
+            </View>
+            <Text style={styles.textoCaixaAbaixo}>Alugar Apt</Text>
+          </View>
+          <View style={styles.caixa}>
+            <View style={styles.imagemContainer}>
+              <Image
+                source={require("../../assets/images/casa_campo.jpg")}
+                style={styles.imagemCategoria}
+              />
+              <View style={styles.overlay2} />
+            </View>
+            <Text style={styles.textoCaixaAbaixo}>Chalés</Text>
+          </View>
+          <View style={styles.caixa}>
+            <View style={styles.imagemContainer}>
+              <Image
+                source={require("../../assets/images/sitio.jpg")}
+                style={styles.imagemCategoria}
+              />
+              <View style={styles.overlay2} />
+            </View>
+            <Text style={styles.textoCaixaAbaixo}>Terrenos</Text>
+          </View>
+        </View>
+
+        <View style={styles.barra} />
+
+        {imoveis.map((Imovel) => (
+          <TouchableOpacity
+            key={Imovel.id}
+            style={styles.caixaVertical}
+            onPress={() =>
+              router.push({
+                pathname: "/house/[id]",
+                params: {
+                  id: Imovel.id,
+                  title: Imovel.title,
+                  info: Imovel.info,
+                  image: Imovel.image,
+                },
+              })
+            }
+          >
+            <Image source={Imovel.image} style={styles.imagemVertical} />
+            <View style={styles.textContainer}>
+              <Text style={styles.textoCaixaVertical}>{Imovel.title}</Text>
+              <Text style={styles.infoText}>{Imovel.info}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
       </View>
-
-      <View style={styles.linha}>
-        <View style={styles.caixa}>
-          <Image
-            source={require("../../assets/images/apartamento_2.jpg")}
-            style={styles.imagemCategoria}
-          />
-          <Text style={styles.textoCaixaAbaixo}>Comprar Apartamentos</Text>
-        </View>
-        <View style={styles.caixa}>
-          <Image
-            source={require("../../assets/images/casa_2.jpg")}
-            style={styles.imagemCategoria}
-          />
-          <Text style={styles.textoCaixaAbaixo}>Comprar Casas</Text>
-        </View>
-        <View style={styles.caixa}>
-          <Image
-            source={require("../../assets/images/casa_1.jpg")}
-            style={styles.imagemCategoria}
-          />
-          <Text style={styles.textoCaixaAbaixo}>Alugar Casas</Text>
-        </View>
-      </View>
-
-      <View style={styles.linha}>
-        <View style={styles.caixa}>
-          <Image
-            source={require("../../assets/images/apartamento_1.jpg")}
-            style={styles.imagemCategoria}
-          />
-          <Text style={styles.textoCaixaAbaixo}>Alugar Apartamentos</Text>
-        </View>
-        <View style={styles.caixa}>
-          <Image
-            source={require("../../assets/images/casa_campo.jpg")}
-            style={styles.imagemCategoria}
-          />
-          <Text style={styles.textoCaixaAbaixo}>Chalés</Text>
-        </View>
-        <View style={styles.caixa}>
-          <Image
-            source={require("../../assets/images/sitio.jpg")}
-            style={styles.imagemCategoria}
-          />
-          <Text style={styles.textoCaixaAbaixo}>Terrenos</Text>
-        </View>
-      </View>
-
-      <View style={styles.barra} />
-      
-
-      {imoveis.map((Imovel) => (      
-
-        <TouchableOpacity key={Imovel.id} style={styles.caixaVertical}
-        onPress={() => 
-        router.push({
-          pathname:"/house/[id]",
-          params:{id: Imovel.id, title: Imovel.title, image: Imovel.image},
-        })}>
-        <Image
-            source={Imovel.image}
-            style={styles.imagemVertical}
-          />
-          <Text style={styles.textoCaixaVertical}>{Imovel.title}</Text>
-        </TouchableOpacity>
-
-      ))}
-
- 
-    </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   barra: {
@@ -123,7 +177,9 @@ const styles = StyleSheet.create({
     right: 0,
     textAlign: "center",
     color: colors.branco,
+    fontWeight: "bold",
     fontSize: 24,
+    marginTop: 180,
   },
   container: {
     flex: 1,
@@ -134,22 +190,22 @@ const styles = StyleSheet.create({
   },
   imagemContainer: {
     width: "100%",
-    height: 200,
-    marginBottom: 0,
-    overflow: "hidden",
+    height: "100%",
+    position: "relative",
   },
   imagem: {
     width: "100%",
-    height: "100%",
+    height: 200,
     resizeMode: "cover",
-    bottom: 20
+    bottom: 20,
+    elevation: 5,
   },
   imagemCategoria: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
     borderRadius: 10,
-    backgroundColor: "rgba(0, 0, 0, 0.5)"
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   texto: {
     fontSize: 24,
@@ -170,6 +226,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 10,
     position: "relative",
+    elevation: 5,
   },
   textoCaixaAbaixo: {
     position: "absolute",
@@ -178,13 +235,14 @@ const styles = StyleSheet.create({
     right: 0,
     textAlign: "center",
     color: "#fff",
-    fontSize: 16,
-    paddingVertical: 2,
+    fontWeight: "bold",
+    fontSize: 15,
+    paddingVertical: 10,
     borderRadius: 5,
   },
   caixaVertical: {
     flexDirection: "row",
-    width: "100%",
+    width: "95%",
     height: 100,
     backgroundColor: colors.cinza,
     marginBottom: 10,
@@ -192,14 +250,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     paddingHorizontal: 10,
+    elevation: 5,
   },
   textoCaixaVertical: {
     fontSize: 18,
     color: colors.escuro,
-    flex: 1,
-    marginLeft: 10,
-    alignSelf: "flex-start",
-    marginTop: 10,
+    marginTop: 20,
+    fontWeight: "bold",
   },
   imagemVertical: {
     width: 100,
@@ -207,8 +264,31 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 10,
     marginRight: 10,
-    marginTop: 10
+    marginTop: 10,
+  },
+  overlay2: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    borderRadius: 10,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  infoText: {
+    fontSize: 13,
+    marginBottom: 10,
+    color: colors.escuro,
+    marginTop: 5,
+    lineHeight: 18,
+    maxWidth: "90%",
+  },
+  textContainer: {
+    flex: 1,
+    marginLeft: 10,
+    justifyContent: "center",
   },
 });
-
-
