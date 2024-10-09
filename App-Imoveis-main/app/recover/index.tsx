@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Text,
   View,
@@ -8,18 +7,19 @@ import {
   Dimensions,
   Pressable,
 } from "react-native";
-import logo from "../assets/images/logo.png";
-import { colors } from "../constants/Colors";
+import logo from "../../assets/images/logo.png";
+import { colors } from "../../constants/Colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import React from "react";
 
-export default function Index() {
+export default function Recover() {
   return (
     <View style={style.container}>
       <View style={style.boxTop}>
         <View style={style.circle}>
           <Image source={logo} style={style.logo} resizeMode="contain" />
-          <Text style={style.title}>Login</Text>
+          <Text style={style.title}>Esqueceu sua senha?</Text>
         </View>
       </View>
       <View style={style.boxMid}>
@@ -28,27 +28,23 @@ export default function Index() {
           <MaterialIcons name="email" size={20} color={colors.escuro} />
         </View>
         <View style={style.boxInput}>
-          <TextInput style={style.input} placeholder="Digite sua senha" />
+          <TextInput style={style.input} placeholder="Digite sua nova senha" />
+          <MaterialIcons name="lock" size={20} color={colors.escuro} />
+        </View>
+        <View style={style.boxInput}>
+          <TextInput
+            style={style.input}
+            placeholder="Digite sua senha novamente"
+          />
           <MaterialIcons name="lock" size={20} color={colors.escuro} />
         </View>
       </View>
       <View style={style.boxBottom}>
-        <Link href="/recover" asChild>
-          <Text style={style.text}> Esqueceu a senha? </Text>
+        <Link href="/(tabs)" asChild>
+          <Pressable style={style.btn}>
+            <Text style={style.btntext}>Verificação</Text>
+          </Pressable>
         </Link>
-        <View>
-          <Link href="/(tabs)" asChild>
-            <Pressable style={style.btn}>
-              <Text style={style.btntext}>Entrar</Text>
-            </Pressable>
-          </Link>
-        </View>
-        <Text style={style.text2}>
-          Ainda não possui uma conta?{" "}
-          <Link href="/register" asChild>
-            <Text style={style.register}>Registre-se</Text>
-          </Link>
-        </Text>
       </View>
     </View>
   );
@@ -93,7 +89,7 @@ const style = StyleSheet.create({
     textShadowColor: "rgba(0, 0, 0, 0.25)",
     textShadowOffset: { width: 0, height: 4 },
     textShadowRadius: 4,
-    fontSize: 30,
+    fontSize: 25,
   },
 
   // CONTEUDO DO MEIO
@@ -115,7 +111,7 @@ const style = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 40,
     flexDirection: "row",
-    marginTop: 30,
+    marginTop: 20,
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 35,
