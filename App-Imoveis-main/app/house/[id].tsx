@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   useWindowDimensions,
   ScrollView,
+  Linking,
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { colors } from "../../constants/Colors";
@@ -19,16 +20,39 @@ const SCREEN_SPACE = 24;
 import YoutubeIframe from "react-native-youtube-iframe";
 
 export default function House() {
+
   //id image title price local details video
   const { id } = useLocalSearchParams();
   const { title } = useLocalSearchParams();
+  const { price } = useLocalSearchParams();
+  const { local } = useLocalSearchParams();  
   const { info } = useLocalSearchParams();
   const { image } = useLocalSearchParams();
+  const { video } = useLocalSearchParams();
 
   //video
   const [videoReady, setVideoReady] = useState(false);
   const { width } = useWindowDimensions();
   const VIDEO_WIDTH = width - SCREEN_SPACE * 2;
+
+  // whatsapp
+  const sendWhatsappText = () =>{
+    const phoneNumber = '5531999999999'; 
+    const text = "Olá estou interessado(a) no Imóvel:";
+
+    const url = `whatsapp://send?phone=${phoneNumber}&text=${text}`;
+
+    try {
+      Linking.openURL(url);
+
+      console.log('WhatsApp opened successfully on Android');
+    } catch (error) {
+      console.error('Error opening WhatsApp on Android:', error);
+    }
+  };
+
+  //button Fav
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <ScrollView style={style.container}>
@@ -38,29 +62,29 @@ export default function House() {
 
       <View style={style.div1}>
         <Image source={image} style={style.midia} />
-        <Text style={style.title}> {title}</Text>
+        <Text style={style.title}> {title} </Text>
       </View>
 
+      <TouchableOpacity style={style.heart}
+        onPress={() => setIsActive(!isActive)}>
+          {isActive ? <AntDesign name="heart" size={30} color="black" /> : <AntDesign name="hearto" size={30} color="black" />} 
+        </TouchableOpacity>
+
       <Text style={style.subtitle}>Valor</Text>
-      <Text style={style.price}>R$ 3.200.000</Text>
+      <Text style={style.price}>R$ {price} </Text>
 
       <Text style={style.subtitle}>Localização</Text>
-      <Text style={style.text}>Rio de Janeiro, Barra da Tijuca</Text>
+      <Text style={style.text}>{local}</Text>
 
       <Text style={style.subtitle}>Detalhes</Text>
-      <Text style={style.text}>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam,
-        eligendi voluptates odit consequatur quasi, dolore omnis harum eveniet
-        assumenda, magni dolorum qui odio laborum? Odit quo dolore iure quam
-        deserunt?
-      </Text>
+      <Text style={style.text}> {info} </Text>
 
       <Text style={style.textVideo}>Vídeo da Residência</Text>
 
       {/*video*/}
       <View style={style.player}>
         <YoutubeIframe
-          videoId="DLzxrzFCyOs"
+          videoId={video}
           width={VIDEO_WIDTH}
           height={videoReady ? VIDEO_HEIGHT : 0}
           onReady={() => setVideoReady(true)}
@@ -71,8 +95,9 @@ export default function House() {
 
       <View style={style.barra} />
 
-      <TouchableOpacity style={style.button}>
-        <Text style={style.textButton}>Conversar com o Vendedor</Text>
+      <TouchableOpacity style={style.button}
+      onPress={sendWhatsappText}>
+        <Text style={style.textButton}>Converse com o Vendedor</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -91,8 +116,8 @@ const style = StyleSheet.create({
   },
 
   midia: {
-    width: "100%",
-    height: 200,
+    width: "110%",
+    height: 220,
     borderRadius: 10,
     marginBottom: 5,
   },
@@ -101,6 +126,10 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     color: colors.title,
     fontSize: 30,
+  },
+  
+  heart:{
+    alignItems:'flex-end'
   },
 
   subtitle: {

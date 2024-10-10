@@ -14,8 +14,11 @@ import { router } from "expo-router";
 interface Imovel {
   id: number;
   title: string;
+  price: string;  
+  local: string;  
   info: string;
   image: any;
+  video: string;
 }
 
 export default function Home() {
@@ -23,32 +26,47 @@ export default function Home() {
     {
       id: 1,
       title: "Casa Maravilhosa",
+      price: "3.200.000",
+      local:"Rio de Janeiro, Barra da Tijuca",
       info: "Casa com quatro quartos no melhor condomínio da Zona Oeste",
       image: require("../../assets/images/casa_2.jpg"),
+      video:"DLzxrzFCyOs",
     },
     {
       id: 2,
       title: "Casa de Campo",
+      price: "4.100.000",
+      local:"Rio de Janeiro, Vargem Grande",
       info: "Casa com duas suítes e local para pets",
       image: require("../../assets/images/casa_1.jpg"),
+      video:"bOY3qic5_t4",
     },
     {
       id: 3,
       title: "Apartamento",
+      price: "2.250.000",
+      local:"Rio de Janeiro, Recreio dos Bandeirantes",
       info: "Apartamento mais barato da região",
       image: require("../../assets/images/apartamento_1.jpg"),
+      video:"DLzxrzFCyOs",
     },
     {
       id: 4,
       title: "Terreno",
+      price: "1.800.000",
+      local:"Rio de Janeiro, Barra da Tijuca",      
       info: "Terreno com 500m²",
       image: require("../../assets/images/sitio.jpg"),
+      video:"DLzxrzFCyOs",
     },
     {
       id: 5,
       title: "Chalé",
+      price: "5.000.000",
+      local:"Rio de Janeiro, Teresopólis",      
       info: "Chalé aconchegante na serra de Petrópolis",
       image: require("../../assets/images/casa_campo.jpg"),
+      video:"DLzxrzFCyOs",
     },
   ];
 
@@ -144,8 +162,11 @@ export default function Home() {
                 params: {
                   id: Imovel.id,
                   title: Imovel.title,
+                  price:Imovel.price,
+                  local:Imovel.local,
                   info: Imovel.info,
                   image: Imovel.image,
+                  video: Imovel.video,
                 },
               })
             }
