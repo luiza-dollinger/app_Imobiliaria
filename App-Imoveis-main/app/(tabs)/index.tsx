@@ -63,7 +63,7 @@ export default function Home() {
       id: 5,
       title: "Chalé",
       price: "5.000.000",
-      local:"Rio de Janeiro, Teresopólis",      
+      local:"Rio de Janeiro, Petropólis",      
       info: "Chalé aconchegante na serra de Petrópolis",
       image: require("../../assets/images/casa_campo.jpg"),
       video:"DLzxrzFCyOs",

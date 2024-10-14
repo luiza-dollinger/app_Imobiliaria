@@ -56,19 +56,22 @@ export default function House() {
 
   return (
     <ScrollView style={style.container}>
-      <Link href="/(tabs)">
+
+      <View style={style.header}>
+      <Link style={style.left} href="/(tabs)">
         <AntDesign name="left" size={20} color={colors.escuro} />
       </Link>
+
+      <TouchableOpacity style={style.heart}
+        onPress={() => setIsActive(!isActive)}>
+          {isActive ? <AntDesign name="heart" size={30} color="black" /> : <AntDesign name="hearto" size={30} color="black" />} 
+      </TouchableOpacity>
+      </View>
 
       <View style={style.div1}>
         <Image source={image} style={style.midia} />
         <Text style={style.title}> {title} </Text>
       </View>
-
-      <TouchableOpacity style={style.heart}
-        onPress={() => setIsActive(!isActive)}>
-          {isActive ? <AntDesign name="heart" size={30} color="black" /> : <AntDesign name="hearto" size={30} color="black" />} 
-        </TouchableOpacity>
 
       <Text style={style.subtitle}>Valor</Text>
       <Text style={style.price}>R$ {price} </Text>
@@ -109,6 +112,21 @@ const style = StyleSheet.create({
     backgroundColor: colors.bg,
   },
 
+  header:{
+    marginTop:20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+
+  heart:{
+    alignItems:"flex-end"
+  },
+
+  left:{
+    alignItems:"flex-start"
+  },
+
   div1: {
     alignItems: "center",
     justifyContent: "center",
@@ -126,10 +144,6 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     color: colors.title,
     fontSize: 30,
-  },
-  
-  heart:{
-    alignItems:'flex-end'
   },
 
   subtitle: {
